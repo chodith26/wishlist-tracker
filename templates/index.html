@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <h1>🛒 Wishlist Tracker</h1>
+    </nav>
+
+    <main>
+        <section class="form-section">
+            <h2>Add Item</h2>
+            <form action="/add" method="POST">
+                <input type="text" name="name" placeholder="Product name" required>
+                <input type="text" name="price" placeholder="Price (e.g. ₹999)" required>
+                <select name="category">
+                    <option value="Electronics">Electronics</option>
+                    <option value="Books">Books</option>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button type="submit">Add to Wishlist</button>
+            </form>
+        </section>
+
+        <section class="items-section">
+            <h2>Your Wishlist</h2>
+            <div class="grid">
+                {% for item in items %}
+                <div class="card">
+                    <p class="item-name">{{ item.name }}</p>
+                    <p class="item-price">{{ item.price }}</p>
+                    <span class="item-category">{{ item.category }}</span>
+                    <p class="item-date">Added: {{ item.added_on }}</p>
+                    <form action="/delete/{{ item.id }}" method="POST">
+                        <button type="submit" class="delete-btn">Remove</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
