@@ -13,10 +13,14 @@ nav {
     background-color: #131921;
     color: #ffffff;
     padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-nav h1 {
-    font-size: 22px;
+nav p {
+    font-size: 13px;
+    color: #aaa;
 }
 
 main {
@@ -133,4 +137,11 @@ h2 {
 .delete-btn:hover {
     background-color: #B12704;
     color: #ffffff;
+}
+
+.empty-msg {
+    color: #888;
+    font-size: 15px;
+    padding: 20px 0;
+    grid-column: 1 / -1;
 }

@@ -10,6 +10,7 @@
 
     <nav>
         <h1>🛒 Wishlist Tracker</h1>
+        <p>Track products you want to buy</p>
     </nav>
 
     <main>
@@ -31,19 +32,23 @@
         </section>
 
         <section class="items-section">
-            <h2>Your Wishlist</h2>
+            <h2>Your Wishlist ({{ count }} items)</h2>
             <div class="grid">
-                {% for item in items %}
-                <div class="card">
-                    <p class="item-name">{{ item.name }}</p>
-                    <p class="item-price">{{ item.price }}</p>
-                    <span class="item-category">{{ item.category }}</span>
-                    <p class="item-date">Added: {{ item.added_on }}</p>
-                    <form action="/delete/{{ item.id }}" method="POST">
-                        <button type="submit" class="delete-btn">Remove</button>
-                    </form>
-                </div>
-                {% endfor %}
+                {% if items %}
+                    {% for item in items %}
+                    <div class="card">
+                        <p class="item-name">{{ item.name }}</p>
+                        <p class="item-price">{{ item.price }}</p>
+                        <span class="item-category">{{ item.category }}</span>
+                        <p class="item-date">Added: {{ item.added_on }}</p>
+                        <form action="/delete/{{ item.id }}" method="POST">
+                            <button type="submit" class="delete-btn">Remove</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="empty-msg">Your wishlist is empty. Add something above!</p>
+                {% endif %}
             </div>
         </section>
     </main>

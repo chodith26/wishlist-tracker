@@ -22,26 +22,26 @@ class WishlistItem(db.Model):
 with app.app_context():
     db.create_all()
 
-
 @app.route('/')
 def home():
     items = db.session.execute(db.select(WishlistItem)).scalars().all()
-    return render_template('index.html', items=items)
-
+    return render_template('index.html', items=items, count=len(items))
 
 @app.route('/add', methods=['POST'])
 def add():
-    name     = request.form.get('name')
-    price    = request.form.get('price')
-    category = request.form.get('category')
-    added_on = datetime.now().strftime('%d %b %Y')
+    name     = request.form.get('name', '').strip()
+    price    = request.form.get('price', '').strip()
+    category = request.form.get('category', '').strip()
 
+    if not name or not price or not category:
+        return redirect(url_for('home'))
+
+    added_on = datetime.now().strftime('%d %b %Y')
     new_item = WishlistItem(name=name, price=price,
                             category=category, added_on=added_on)
     db.session.add(new_item)
     db.session.commit()
     return redirect(url_for('home'))
-
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
