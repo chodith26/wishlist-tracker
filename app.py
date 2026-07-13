@@ -24,8 +24,8 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    items = db.session.execute(db.select(WishlistItem)).scalars().all()
-    return render_template('index.html', items=items, count=len(items))
+    count = db.session.execute(db.select(WishlistItem)).scalars().all()
+    return render_template('index.html', count=len(count))
 
 @app.route('/add', methods=['POST'])
 def add():
