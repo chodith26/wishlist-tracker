@@ -21,12 +21,15 @@ A simple full-stack web app to add, view, and remove wishlist items — built wi
 - **Frontend:** HTML, CSS, vanilla JavaScript
 
 ## Project Structure
+
+```
 wishlist-tracker/
 ├── static/
-│ ├── main.js
-│ └── style.css
+│   ├── main.js
+│   └── style.css
 ├── templates/
-│ └── index.html
+│   └── index.html
 ├── app.py
 ├── requirements.txt
 └── .gitignore
+```
